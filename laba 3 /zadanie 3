@@ -1,0 +1,22 @@
+from unittest.mock import patch
+
+from bs4 import BeautifulSoup
+
+def handle_file(path):
+    with open("data/1.html", "r", encoding="uft-8") as file:
+        xml_content = file.read()
+
+    star = BeautifulSoup(xml_content, features=  "xml").star
+    item = {}
+    for el in star:
+        if el.name is None:
+            continue
+        item[el.name] = el.get_text().strip()
+
+    item['radius'] = int(item['radius'])
+    return item
+
+
+
+
+print(handle_file("data/3.xml"))
